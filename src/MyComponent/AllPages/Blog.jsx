@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { lazy, useEffect, useState } from 'react'
 import './CSS/Blog.css'
 import Layout from '../Common/Layout'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import './CSS/New_Post_Style.css'
 const Blog = () => {
   const [data, setData] = useState([]);
   const [search, setSearch] = useState("")
@@ -67,47 +68,138 @@ const Blog = () => {
           <div id="boxes">
             <div id="rightbox">
               <div className='bg bg-glass'><h2 style={{ marginTop: 40, color: "#3399ff" }}>Categories</h2></div>
-              Any geeks can help other geeks by writing
-              articles on the GeeksforGeeks, publishing
-              articles follow few steps that are Articles
-              that need little modification/improvement
-              from reviewers are published first.
+              <div style={{ textAlign: 'left', marginLeft: 50 }}><br />
+                <Link><h5 to="/">Boilers(11 C, 72 P)</h5></Link><br />
+                <Link><h5 to="/">Brazing and soldering(1 C)</h5></Link><br />
+                <Link><h5 to="/">Drinking fountains(3 C, 9 P)</h5></Link><br />
+                <Link><h5 to="/">Piping(3 C, 97 P)</h5></Link><br />
+                <Link><h5 to="/">Plumbers(7 C, 7 P)</h5></Link><br />
+                <Link><h5 to="/">Plumbing valves(29 P)</h5></Link><br />
+                <Link><h5 to="/">Toilets(8 C, 93 P)</h5></Link><br />
+                <Link><h5 to="/">Tubing (material)(1 C, 16 P)</h5></Link><br />
+              </div>
             </div>
           </div>
           <div id="boxes2">
             <div id="rightbox2">
               <div className='bg bg-glass'><h2 style={{ marginTop: 40, color: "#3399ff" }}>New Post</h2></div>
-              Any geeks can help other geeks by writing
-              articles on the GeeksforGeeks, publishing
-              articles follow few steps that are Articles
-              that need little modification/improvement
-              from reviewers are published first.
+
+
+            {/* ---------------------------------------- */}
+            <div class='wrapper'>
+      <div class='carousel'>
+        <div class='carousel__item'>
+          <div class='carousel__item-head'>
+            🐳
+          </div>
+          <div class='carousel__item-body'>
+            <p class='title'>spouting whale</p>
+            <p>Unicode: U+1F433</p>
+          </div>
+        </div>
+        <div class='carousel__item'>
+          <div class='carousel__item-head'>
+            🐋
+          </div>
+          <div class='carousel__item-body'>
+            <p class='title'>whale</p>
+            <p>Unicode: U+1F40B</p>
+          </div>
+        </div>
+        <div class='carousel__item'>
+          <div class='carousel__item-head'>
+            🐬
+          </div>
+          <div class='carousel__item-body'>
+            <p class='title'>dolphin</p>
+            <p>Unicode: U+1F42C</p>
+          </div>
+        </div>
+        <div class='carousel__item'>
+          <div class='carousel__item-head'>
+            🐟
+          </div>
+          <div class='carousel__item-body'>
+            <p class='title'>fish</p>
+            <p>Unicode: U+1F41F</p>
+          </div>
+        </div>
+        <div class='carousel__item'>
+          <div class='carousel__item-head'>
+            🐠
+          </div>
+          <div class='carousel__item-body'>
+            <p class='title'>tropical fish</p>
+            <p>Unicode: U+1F420</p>
+          </div>
+        </div>
+        <div class='carousel__item'>
+          <div class='carousel__item-head'>
+            🐡
+          </div>
+          <div class='carousel__item-body'>
+            <p class='title'>blowfish</p>
+            <p>Unicode: U+1F421</p>
+          </div>
+        </div>
+        <div class='carousel__item'>
+          <div class='carousel__item-head'>
+            🦈
+          </div>
+          <div class='carousel__item-body'>
+            <p class='title'>shark</p>
+            <p>Unicode: U+1F988</p>
+          </div>
+        </div>
+        <div class='carousel__item'>
+          <div class='carousel__item-head'>
+            🐙
+          </div>
+          <div class='carousel__item-body'>
+            <p class='title'>octopus</p>
+            <p>Unicode: U+1F419</p>
+          </div>
+        </div>
+        <div class='carousel__item'>
+          <div class='carousel__item-head'>
+            🐚
+          </div>
+          <div class='carousel__item-body'>
+            <p class='title'>spiral shell</p>
+            <p>Unicode: U+1F41A</p>
+          </div>
+        </div>
+      </div>
+    </div>
+            {/* ---------------------------------------- */}
+
+
             </div>
           </div>
           {/* -------------------------------------------------------- */}
           <div className="row">
-            {searchData?.slice(0,6).map((item, index) => {
+            {searchData?.slice(0, 6).map((item, index) => {
               return (<>
                 <div className="col-5">
                   <div className="card " style={{ width: '20rem', borderRadius: 30, marginBottom: 50 }}>
                     <img src={item.thumbnailUrl} className="card-img-top" style={{ borderRadius: 30 }} alt="..." />
                     <div className="card-body">
-                      <h5 className="card-title">{item.title}</h5>
-                      <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      <Link to="#" className="btn btn-primary">Reply</Link>
-                    </div>
+                      <h5 className="card-title">{item.title}</h5><br />
+                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <Link to="#" className="btn btn-primary">Reply</Link>
                   </div>
                 </div>
+              </div >
               </>)
 
             })}
-          </div>
         </div>
+      </div>
 
 
 
 
-      </Layout>
+    </Layout >
 
     </>
   )
