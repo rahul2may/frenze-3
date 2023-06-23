@@ -39,7 +39,7 @@ const Login = () => {
   };
   return (
     <>
-
+  <Layout title={'Login Page'}>
       {/* Sing in  Form  Start*/}
       <section className="background-radial-gradient overflow-hidden">
         <div className="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
@@ -123,7 +123,7 @@ const Login = () => {
         </div>
       </section>
       {/* Sing in  Form  End*/}
-
+      </Layout>
     </>
   )
 }

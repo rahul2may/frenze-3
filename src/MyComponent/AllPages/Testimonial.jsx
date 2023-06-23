@@ -6,10 +6,11 @@ const Testimonial = () => {
     <>
       {/* Testimonial Start */}
       <div class="container">
-        <div class="text-center">
-          <h6 class="text-secondary text-uppercase">Testimonial</h6>
-          <h1 class="mb-5">Our Clients Say!</h1>
-        </div>
+        <div className="text-center">
+  <h6 className="text-secondary text-uppercase">Testimonial</h6>
+  <h1 className="mb-5">Our Clients Say!</h1>
+</div>
+
 {/* -----------------------------------------------------------------------------------------------------*/}
         <div className="container">
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4">

@@ -62,31 +62,34 @@ const Header = () => {
               <NavLink to="/" className="nav-item nav-link active">Home</NavLink>
               <NavLink to="/serviceSingle" className="nav-item nav-link">Services</NavLink>
               <NavLink to="/contact" className="nav-item nav-link">Contact</NavLink>
+              <NavLink to="/blog" className="nav-item nav-link">Blog</NavLink>
 
-{/* ------------------------------------------------------------------------------------------------------ */}
+              <form className="form-inline my-2 my-lg-0" style={{ marginLeft: 500, marginRight: 80 }}>
+                <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+                <button className="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
+              </form>
+              {/* ------------------------------------------------------------------------------------------------------ */}
 
               {
                 !auth.user ? (
                   <>
 
-                  <NavLink to="/login" className="nav-item nav-link">Login</NavLink>
-                    {/* <li className="nav-item">
-                      <NavLink className="nav-link" to="/login">Login</NavLink>
-                    </li> */}
+                    <NavLink to="/login" className="nav-item nav-link">Login</NavLink>
+
                   </>) : (
                   <>
                     <li className="nav-item">
-                      <NavLink className="nav-link">{auth.user.name}</NavLink>
+                      <NavLink className="nav-link">{"hi!! "+auth.user.name}</NavLink>
                     </li>
                     <li className="nav-item">
-                      <NavLink onClick={handleLogout} className="nav-link" to="/login">logout</NavLink>
+                      <NavLink onClick={handleLogout} className="nav-link" to="/login" >logout</NavLink>
                     </li>
                   </>
                 )
               }
 
-{/* ------------------------------------------------------------------------------------------------------ */}
-
+              {/* ------------------------------------------------------------------------------------------------------ */}
+              <></>
 
 
             </div>

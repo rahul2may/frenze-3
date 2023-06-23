@@ -8,6 +8,7 @@ import ForgetPassword from './MyComponent/AllPages/ForgetPassword';
 import Contact from './MyComponent/AllPages/Contact';
 import Service from './MyComponent/AllPages/Service';
 import ServiceSingle from './MyComponent/AllPages/ServiceSingle';
+import Blog from './MyComponent/AllPages/Blog';
 
 function App() {
 
@@ -54,6 +55,10 @@ function App() {
     {
       path: "/serviceSingle",
       Component: <ServiceSingle />,
+    },
+    {
+      path: "/blog",
+      Component: <Blog />,
     },
   ];
   return (
