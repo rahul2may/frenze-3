@@ -1,7 +1,135 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '../Common/Layout'
+import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
+import { addUser, getAllUsers } from '../API/Api'
+
+
+const initialValues={
+  name:"",
+  email:"",
+  subject:"",
+  message:""
+}
+
+
 
 const Contact = () => {
+const [user,setUser]=useState(initialValues)
+const [users,setUsers]=useState()
+
+const[error,setError]=useState({})
+const navigate=useNavigate()
+
+
+
+
+const getUsers = async () => {
+  let response = await getAllUsers()
+  setUsers(response?.data)
+}
+
+
+
+// for validate Form
+
+const validation=()=>{
+
+  let error={}
+  if (!user.name){
+      error.name="Name is requerd"
+  }
+   if(!user.email){
+      error.email="Email is requerd"
+  }
+  else if(!/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(user.email))
+  {
+      error.email="Enter a valid email"
+  }
+  
+  if(!user.subject){
+      error.subject="subject is requerd"
+  }
+   
+  if(!user.message){
+      error.message="messag is requerd"
+  }
+  
+  return error
+  }
+
+
+
+
+
+
+
+let name,value
+const postUserData=(e)=>{
+    name=e.target.name
+    value=e.target.value
+    setUser({ ...user,[name]:value})
+
+
+    if (name === "name") {
+      if (value.length === 0) {
+          setError({ ...error, name: "@Name is Required" })
+          setUser({ ...user, name: "" })
+      } else {
+          setError({ ...error, name: "" })
+          setUser({ ...user, name: value })
+      }
+  }
+  if (name === "email") {
+    if (value.length === 0) {
+        setError({ ...error, email: "@Email is Required" })
+        setUser({ ...user, email: "" })
+    } else {
+        setError({ ...error, email: "" })
+        setUser({ ...user, email: value })
+    }
+}
+
+if (name === "subject") {
+  if (value.length === 0) {
+      setError({ ...error, subject: "@Subject is Required" })
+      setUser({ ...user, subject: "" })
+  } else {
+      setError({ ...error, subject: "" })
+      setUser({ ...user, subject: value })
+  }
+}
+if (name === "message") {
+  if (value.length === 0) {
+      setError({ ...error, message: "@Message is Required" })
+      setUser({ ...user, message: "" })
+  } else {
+      setError({ ...error, message: "" })
+      setUser({ ...user, message: value })
+  }
+}
+
+}
+
+const SubmitInfo=async(e)=>{
+  e.preventDefault()
+  let ErrorList = validation()
+  setError(ErrorList)
+  if (Object.keys(ErrorList).length === 0) {
+    await addUser(user)
+    navigate('/')
+    toast('Data Added Successfully')
+
+}
+
+}
+
+useEffect(() => {
+  getUsers()
+}, [])
+// console.log('d', users);
+
+
   return (
     <>
       <Layout title={'Contact Page'}>
@@ -17,32 +145,47 @@ const Contact = () => {
               </div>
               <div className="col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                 <div className="bg-light p-5 h-100 d-flex align-items-center">
-                  <form>
+                  {/* <form> */}
+                  <form onSubmit={SubmitInfo} className="container mt-5">
+
                     <div className="row g-3">
                       <div className="col-md-6">
                         <div className="form-floating">
-                          <input type="text" className="form-control" id="name" placeholder="Your Name" />
-                          <label htmlFor="name">Your Name</label>
-                        </div>
+                          {/* <input type="text" className="form-control" id="name" placeholder="Your Name" /> */}
+                    <input type="text" className="form-control" name="name" placeholder="Your Name" value={user.name} onChange={e => postUserData(e)} />
+                    <label htmlFor="name">Your Name</label>
+                   <span style={{ color: "red", marginLeft: "15px" }}> {error.name} </span>                
+                        </div>                       
                       </div>
+
                       <div className="col-md-6">
                         <div className="form-floating">
-                          <input type="email" className="form-control" id="email" placeholder="Your Email" />
+                          <input type="email" className="form-control" name="email" placeholder="Your Email" value={user.email} onChange={e => postUserData(e)}/>
                           <label htmlFor="email">Your Email</label>
+                          <span style={{ color: "red", marginLeft: "15px" }}> {error.email} </span>
                         </div>
                       </div>
+
                       <div className="col-12">
                         <div className="form-floating">
-                          <input type="text" className="form-control" id="subject" placeholder="Subject" />
-                          <label htmlFor="subject">Subject</label>
+                          {/* <input type="text" className="form-control" id="subject" placeholder="Subject" />
+                          <label htmlFor="subject">Subject</label> */}
+                          <input type="text" className="form-control" name="subject" placeholder="Your Subject" value={user.subject} onChange={e => postUserData(e)}/>
+                          <label htmlFor="email"> Subject</label>
+                          <span style={{ color: "red", marginLeft: "24px" }}> {error.subject} </span>
                         </div>
                       </div>
+
                       <div className="col-12">
                         <div className="form-floating">
-                          <textarea className="form-control" placeholder="Leave a message here" id="message" style={{ height: 150 }} defaultValue={""} />
-                          <label htmlFor="message">Message</label>
+                          {/* <textarea className="form-control" placeholder="Leave a message here" id="message" style={{ height: 150 }} defaultValue={""} />
+                          <label htmlFor="message">Message</label> */}
+                          <input type="text" className="form-control" name="message" placeholder="Your Message" value={user.message} onChange={e => postUserData(e)}/>
+                          <label htmlFor="email"> Message</label>
+                          <span style={{ color: "red", marginLeft: "24px" }}> {error.message} </span>
                         </div>
                       </div>
+                      
                       <div className="col-12">
                         <button className="btn btn-primary w-100 py-3" type="submit">Send Message</button>
                       </div>
